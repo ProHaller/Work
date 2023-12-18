@@ -24,9 +24,9 @@
     {
       "id": 4,
       "name": "Ken",
-      "office_location": "Sapporo",
-      "teams": ["Client Relations"],
-      "projects": ["Branding B"]
+      "office_location": "Fukuoka",
+      "teams": ["Client Relations", "Creative Design", "Marketing"],
+      "projects": ["Branding B", "Website Redesign", "Campaign A"]
     },
     {
       "id": 5,
