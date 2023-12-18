@@ -1,0 +1,74 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Akira",
+      "office_location": "Tokyo",
+      "teams": ["Creative Design", "Marketing"],
+      "projects": ["Campaign A"]
+    },
+    {
+      "id": 2,
+      "name": "Hiroshi",
+      "office_location": "Fukuoka",
+      "teams": ["Marketing"],
+      "projects": ["Website Redesign", "Branding B"]
+    },
+    {
+      "id": 3,
+      "name": "Yumi",
+      "office_location": "Osaka",
+      "teams": ["Creative Design", "Digital Strategy"],
+      "projects": ["Website Redesign"]
+    },
+    {
+      "id": 4,
+      "name": "Ken",
+      "office_location": "Sapporo",
+      "teams": ["Client Relations"],
+      "projects": ["Branding B"]
+    },
+    {
+      "id": 5,
+      "name": "Saki",
+      "office_location": "Tokyo",
+      "teams": ["Creative Design"],
+      "projects": ["Campaign A"]
+    },
+    {
+      "id": 6,
+      "name": "Emiko",
+      "office_location": "Fukuoka",
+      "teams": ["Marketing"],
+      "projects": ["Social Media C"]
+    },
+    {
+      "id": 7,
+      "name": "Taro",
+      "office_location": "Osaka",
+      "teams": ["Digital Strategy"],
+      "projects": ["Product Launch D"]
+    },
+    {
+      "id": 8,
+      "name": "Naomi",
+      "office_location": "Sapporo",
+      "teams": ["Client Relations"],
+      "projects": ["Social Media C"]
+    },
+    {
+      "id": 9,
+      "name": "Ryo",
+      "office_location": "Tokyo",
+      "teams": ["Creative Design"],
+      "projects": ["Product Launch D"]
+    },
+    {
+      "id": 10,
+      "name": "Mayumi",
+      "office_location": "Fukuoka",
+      "teams": ["Digital Strategy"],
+      "projects": ["Campaign A", "Branding B"]
+    }
+  ]
+}
