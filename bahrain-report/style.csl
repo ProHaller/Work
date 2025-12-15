@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+  version="1.0"
+  class="note"
+  default-locale="ja-JP"
+  demote-non-dropping-particle="never">
+  <info>
+    <title>JETRO Simple Note (JP) — numeric footnotes + 出所：</title>
+    <id>http://example.org/styles/jetro-simple-note</id>
+    <category citation-format="note" />
+    <category field="generic-base" />
+    <updated>2025-12-12T00:00:00Z</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">
+      This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License
+    </rights>
+  </info>
+
+  <!-- ============
+       BASIC MACROS
+       ============ -->
+
+  <!-- Authors / institutional authors printed as-is -->
+  <macro name="author">
+    <names variable="author">
+      <name form="long" and="text" delimiter=", " />
+      <substitute>
+        <names variable="editor" />
+        <text variable="publisher" />
+      </substitute>
+    </names>
+  </macro>
+
+  <!-- Year (西暦) -->
+  <macro name="year">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year" />
+        </date>
+      </if>
+    </choose>
+  </macro>
+
+  <!-- Place (publisher-place) with fallbacks -->
+  <macro name="place">
+    <choose>
+      <if variable="publisher-place">
+        <text variable="publisher-place" />
+      </if>
+      <else-if variable="event-place">
+        <text variable="event-place" />
+      </else-if>
+    </choose>
+  </macro>
+
+  <!-- Container/book/journal title in italics if present -->
+  <macro name="container">
+    <choose>
+      <if variable="container-title">
+        <text variable="container-title" font-style="italic" />
+      </if>
+    </choose>
+  </macro>
+
+  <!-- Title (plain, no links) for bibliography -->
+  <macro name="plain-title">
+    <choose>
+      <if variable="title">
+        <text variable="title" />
+      </if>
+      <else>
+        <text value="[無題]" />
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Title linked (for footnotes only):
+       Uses Blinky 0.2 "magic markers".
+       If DOI present, link to doi.org; else link URL; else just title. -->
+  <macro name="linked-title">
+    <choose>
+      <if variable="DOI">
+        <group prefix=" <<<" suffix=">>>">
+          <text variable="DOI" prefix="https://doi.org/" suffix="|||" />
+          <text variable="title" />
+        </group>
+      </if>
+      <else-if variable="URL">
+        <group prefix="<<<" suffix=">>>">
+          <text variable="URL" suffix="|||" />
+          <text variable="title" />
+        </group>
+      </else-if>
+      <else>
+        <text variable="title" />
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Pages (pp.) -->
+  <macro name="pages">
+    <choose>
+      <if variable="page">
+        <group delimiter=" ">
+          <label variable="page" form="short" />
+          <text variable="page" />
+        </group>
+      </if>
+    </choose>
+  </macro>
+
+  <macro name="pubblock">
+    <choose>
+      <if variable="publisher publisher-place" match="all">
+        <group delimiter=": ">
+          <text variable="publisher-place" />
+          <text variable="publisher" />
+        </group>
+      </if>
+      <else-if variable="publisher">
+        <text variable="publisher" />
+      </else-if>
+      <else-if variable="publisher-place">
+        <text variable="publisher-place" />
+      </else-if>
+    </choose>
+  </macro>
+
+
+  <!-- ============
+       CITATIONS (FOOTNOTES)
+       ============ -->
+  <macro name="short-linked-title">
+    <choose>
+      <if variable="DOI">
+        <group prefix="<<<" suffix=">>>">
+          <text variable="DOI" prefix="https://doi.org/" suffix="|||" />
+          <text variable="title-short" />
+        </group>
+      </if>
+      <else-if variable="URL">
+        <group prefix="<<<" suffix=">>>">
+          <text variable="URL" suffix="|||" />
+          <text variable="title-short" />
+        </group>
+      </else-if>
+      <else>
+        <text variable="title-short" />
+      </else>
+    </choose>
+  </macro>
+
+  <!-- Make subsequent mentions reuse the same citation number -->
+  <citation>
+    <layout delimiter="; ">
+      <choose>
+        <if position="first">
+          <!-- First mention: show full citation in footnote -->
+          <group delimiter=", ">
+            <text macro="author" />
+            <text macro="year" />
+            <text macro="linked-title" />
+          </group>
+          <choose>
+            <if variable="title" match="none">
+              <text variable="URL" prefix=", " />
+            </if>
+          </choose>
+        </if>
+        <else>
+          <text variable="first-reference-note-number" />
+        </else>
+      </choose>
+    </layout>
+  </citation>
+
+
+  <!-- ============
+       BIBLIOGRAPHY
+       ============ -->
+  <bibliography et-al-min="99" et-al-use-first="99">
+    <sort>
+      <key variable="first-reference-note-number" sort="ascending" />
+    </sort>
+    <layout>
+      <!-- Number + TAB + 出所： -->
+      <group>
+        <text variable="citation-number" display="left-margin" />
+      </group>
+
+      <!-- Core: Author/Institution. (Year). Title. Container/Report info. Pubblock. -->
+      <group>
+        <group delimiter=", " suffix=", ">
+          <text macro="author" />
+          <text macro="year" />
+        </group>
+        <text macro="plain-title" suffix=", " />
+        <group delimiter=", " suffix=", ">
+          <text macro="container" />
+          <text macro="pages" />
+          <text macro="pubblock" />
+        </group>
+      </group>
+
+      <!-- Show identifiers/links plainly at the end -->
+      <choose>
+        <if variable="DOI">
+          <group prefix="<<<" suffix=">>>">
+            <text variable="DOI" prefix="https://doi.org/" suffix="|||" />
+            <text variable="DOI" />
+          </group>
+        </if>
+        <else variable="URL">
+          <group prefix=" <<<" suffix=">>>">
+            <text variable="URL" suffix=": |||" />
+            <text variable="URL" />
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

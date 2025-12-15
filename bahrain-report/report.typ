@@ -1,26 +1,17 @@
 #import "@preview/hydra:0.6.2": hydra
 #import "titlepage.typ": *
 
-
-// ----- Brand placement: `Tsunagaru` ----------------------
-#show "Tsunagaru": name => box[
-  #box(image(
-    "assets/tsunagaru_logo.svg",
-    height: 0.6em,
-  ))
-]
-
 // ----- Main Template Function: `basic-report` ----------------------
 
 #let basic-report(
-  language: "en",
+  language: "ja",
   doc-category: "none",
   doc-title: "none",
-  heading-font: "Ubuntu",
-  author: "Roland Haller",
+  heading-font: "YuMincho",
+  author: "ハレ　ローラン",
   affiliation: "Tsunagaru",
-  logo: image("assets/tsunagaru_logo_alone.svg", width: 4cm),
   show-outline: true,
+  logo: none,
   compact-mode: false,
   heading-color: blue,
   body,
@@ -28,10 +19,10 @@
   // ----- Global Parameters ------------------------
 
   set document(title: doc-title, author: author)
-  set text(lang: language)
+  set text(lang: language, number-type: "lining")
 
 
-  let body-font = "Vollkorn"
+  let body-font = "YuMincho"
   let body-size = 11pt
   // let heading-font = "Ubuntu"
 
@@ -192,6 +183,7 @@
       } else {
         "Contents"
       },
+      depth: 2,
       indent: auto,
     )
     counter(page).update(0) // so the first chapter starts at page 1 (now in arabic numbers)
